@@ -7,4 +7,31 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'todo';
+
+  filter: 'all' | 'active' | 'done' = 'all';
+
+  allItems = [
+    { "description": "Learn Angular", "done": true },
+    { "description": "Learn Java", "done": false },
+    { "description": "Spring Boot", "done": false },
+    { "description": "CSHARP", "done": true },
+    { "description": "Learn Angular", "done": true },
+  ];
+
+  get items() {
+
+    if (this.filter === 'all') {
+      return this.allItems;
+    }
+    return this.allItems.filter(item => this.filter === 'done' ? item.done : !item.done);
+
+  }
+
+  addItem(description: string) {
+    this.allItems.unshift({
+      description,
+      done: false
+    })
+  }
+
 }
